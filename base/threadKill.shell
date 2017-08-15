@@ -1,0 +1,10 @@
+#!/bin/bash
+#强制关闭进程,使用方式：sh threadKill.sh serviceName
+echo  "将杀死$1进程"
+pid=`ps -ax|grep $1|grep -v grep |grep -v kill.sh|awk '{print $1}'`
+echo "获取到进程如下:"
+ps -ax|grep $1|grep -v grep |grep -v kill.sh
+if [  $pid ]
+then
+kill  $pid
+fi
