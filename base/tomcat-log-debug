@@ -6,11 +6,11 @@ sed -i 's/INFO/DEBUG/g' ${filePath}/webapps/ROOT/WEB-INF/classes/logback.xml
 sh ${filePath}/bin/shutdown.sh
 sleep 3
 pid=`ps -ef|grep tomcat |grep -w "$filePath "|grep -v 'grep'|awk '{print $2}'`
-if [  $pid ];then
+if [ "$pid"="" ];then
      echo "[$pid]进程将强制关闭"
-  	kill -9 "$pid"
+  	kill -9 $pid
   	pid1=`ps -ef|grep tomcat |grep -w "$filePath "|grep -v 'grep'|awk '{print $2}'`
-  	if [  $pid1 ];then
+  	if [ "$pid1"="" ];then
 		echo '进程关闭失败,请手工重启!'
 	else
           echo 'starting'
@@ -18,5 +18,5 @@ if [  $pid ];then
 	fi
 else
      echo 'starting'
-	sh ${filePath}/bin/startup.sh
+           sh ${filePath}/bin/startup.sh
 fi
